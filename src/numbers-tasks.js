@@ -221,12 +221,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (typeof value in ['string', 'number']) {
-    const r = Number.parseInt(value, 10);
-    if (Number.isNaN(r)) return def;
-    return r;
-  }
-  return def;
+  const r = Number.parseInt(value, 10);
+  if (Number.isNaN(r)) return def;
+  return r;
 }
 
 /**
@@ -260,6 +257,9 @@ function getCube(num) {
 function getFibonacciNumber(index) {
   let a = 0;
   let b = 1;
+
+  if (index < 2) return index;
+
   for (let i = 1; i < index; i += 1) {
     const c = a + b;
     a = b;
@@ -489,7 +489,7 @@ function getIntegerOnString(str, base) {
  * 2 ** 53  => false
  */
 function isSafeInteger(number) {
-  return Number.isInteger(number) && Number.MIN_SAFE_INTEGER <= number <= Number.MAX_SAFE_INTEGER;
+  return Number.isSafeInteger(number);
 }
 
 /**
@@ -579,7 +579,7 @@ function getSumOfNumbers(x1, x2, x3) {
  * 0, 5   => 5
  */
 function getMaxNumber(firstNumber, secondNumber) {
-  return firstNumber > secondNumber ? firstNumber : secondNumber;
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
@@ -626,7 +626,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  let n = Math.abs(number);
+  const n = Math.abs(number);
   return Math.floor(n / 2) + (n % 2);
 }
 
